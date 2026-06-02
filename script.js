@@ -1,39 +1,56 @@
 const WA_NUMBER = "393290937951";
+const BOOKING_EMAIL = "luxwaydrivers@gmail.com";
 
 const translations = {
   en: {
     navBook: "Book", navServices: "Services", navReviews: "Reviews",
-    eyebrow: "Licensed NCC Service in Rome",
+    eyebrow: "NCC in Rome",
     headline: "Private Transfers in Rome",
     subheadline: "Fixed Prices • Professional Chauffeur Service • WhatsApp Booking",
     badgeFixed: "Fixed Prices", badgeFees: "No Hidden Fees", badgeFlight: "Flight Monitoring", badgeEnglish: "English Speaking Driver", badgePay: "Pay Directly to the Driver",
     bookNow: "Book Now", airportTitle: "Airport Transfers", cruiseTitle: "Cruise Port Transfers", hourlyTitle: "Hourly Chauffeur Service", cityTitle: "City to City Transfers", tourTitle: "Rome Panoramic Tour",
+    tourCardText: "3 Hours • Rome Highlights",
     quote: "Request a Quote", bookingEyebrow: "Book in under 60 seconds", bookingTitle: "Fast WhatsApp Booking",
     bookingText: "Select your service, vehicle and details. Your complete booking request opens directly in WhatsApp.",
-    selectService: "Select Service", yourPrice: "Your Price", openWhatsapp: "Open WhatsApp with Booking Details",
-    reviewsTitle: "Premium Reviews", reviewsText: "Top-rated private chauffeur service for Rome arrivals, cruise transfers and private tours.", viewReviews: "View All Reviews",
+    selectService: "Select Service", yourPrice: "Your Price", openWhatsapp: "Send Request via WhatsApp", sendEmail: "Send Request by Email",
+    reviewsTitle: "Premium Reviews", reviewsText: "Top-rated private chauffeur service for Rome arrivals, cruise transfers and private tours.",
+    faqTitle: "Frequently Asked Questions", faqText: "Clear answers before booking your LuxWay private chauffeur service in Rome.",
+    faq1Question: "How do I book a transfer?", faq1Answer: "Select the service, vehicle and travel details. The complete request opens directly on WhatsApp, where we confirm availability and final details.",
+    faq2Question: "Are prices fixed?", faq2Answer: "Airport, port and Rome panoramic tour prices are fixed for the selected vehicle. City-to-city transfers are quoted by WhatsApp.",
+    faq3Question: "What is included in the 3-hour panoramic tour?", faq3Answer: "The tour includes a private chauffeur and the main checkpoints: Colosseum, Trevi Fountain, Spanish Steps, Circus Maximus, Pantheon and Gianicolo Hill.",
+    faq4Question: "Can I pay the driver directly?", faq4Answer: "Yes. You can pay directly to the driver, and the booking details are confirmed in advance through WhatsApp.",
+    faq5Question: "Why choose LuxWay instead of another company?", faq5Answer: "LuxWay combines fixed prices, licensed NCC drivers, clean premium vehicles, punctual service, flight monitoring and direct WhatsApp or email coordination. You speak with the team before the ride, so every detail is clear before pickup.",
     airportDesc: "Private transfers from Fiumicino and Ciampino with flight monitoring, meet and greet, fixed pricing and direct WhatsApp coordination.",
     cruiseDesc: "Comfortable transfers between Rome, airports and Civitavecchia Cruise Port, planned around boarding and disembarkation times.",
     hourlyDesc: "A private chauffeur available for shopping, meetings, events, restaurants and multiple stops across Rome.",
     cityDesc: "Private transfers across Italy, including Rome to Florence, Naples, Positano and the Amalfi Coast.",
-    tourDesc: "A 3-hour panoramic tour with photo stops, audio guide support and Rome’s main landmarks, including the Colosseum."
+    tourDesc: "A 3-hour panoramic chauffeur tour designed to enjoy Rome’s most iconic views in total comfort, with time for elegant photo stops.",
+    tourPointColosseum: "Colosseum", tourPointTrevi: "Trevi Fountain", tourPointSpagna: "Spanish Steps", tourPointCircus: "Circus Maximus", tourPointPantheon: "Pantheon", tourPointGianicolo: "Gianicolo Hill", bookTour: "Book Tour"
   },
   it: {
     navBook: "Prenota", navServices: "Servizi", navReviews: "Recensioni",
-    eyebrow: "Servizio NCC autorizzato a Roma",
+    eyebrow: "NCC a Roma",
     headline: "Transfer Privati a Roma",
     subheadline: "Prezzi Fissi • Chauffeur Professionale • Prenotazione WhatsApp",
     badgeFixed: "Prezzi Fissi", badgeFees: "Nessun Costo Nascosto", badgeFlight: "Monitoraggio Volo", badgeEnglish: "Autista parla inglese", badgePay: "Paghi direttamente all'autista",
     bookNow: "Prenota Ora", airportTitle: "Transfer Aeroporto", cruiseTitle: "Transfer Porto Crociere", hourlyTitle: "Chauffeur a Disposizione", cityTitle: "Transfer Citta a Citta", tourTitle: "Tour Panoramico di Roma",
+    tourCardText: "3 Ore • Tappe Iconiche",
     quote: "Richiedi Preventivo", bookingEyebrow: "Prenota in meno di 60 secondi", bookingTitle: "Prenotazione WhatsApp Rapida",
     bookingText: "Seleziona servizio, veicolo e dettagli. La richiesta completa si apre direttamente su WhatsApp.",
-    selectService: "Seleziona Servizio", yourPrice: "Il tuo prezzo", openWhatsapp: "Apri WhatsApp con i dettagli",
-    reviewsTitle: "Recensioni Premium", reviewsText: "Servizio chauffeur top-rated per arrivi a Roma, transfer crociere e tour privati.", viewReviews: "Vedi Tutte le Recensioni",
+    selectService: "Seleziona Servizio", yourPrice: "Il tuo prezzo", openWhatsapp: "Invia la richiesta tramite WhatsApp", sendEmail: "Invia richiesta via email",
+    reviewsTitle: "Recensioni Premium", reviewsText: "Servizio chauffeur top-rated per arrivi a Roma, transfer crociere e tour privati.",
+    faqTitle: "Domande Frequenti", faqText: "Risposte chiare prima di prenotare il tuo servizio chauffeur privato LuxWay a Roma.",
+    faq1Question: "Come prenoto un transfer?", faq1Answer: "Seleziona servizio, veicolo e dettagli del viaggio. La richiesta completa si apre direttamente su WhatsApp, dove confermiamo disponibilita e dettagli finali.",
+    faq2Question: "I prezzi sono fissi?", faq2Answer: "I prezzi per aeroporto, porto e tour panoramico di Roma sono fissi in base al veicolo selezionato. I transfer citta a citta vengono quotati su WhatsApp.",
+    faq3Question: "Cosa include il tour panoramico di 3 ore?", faq3Answer: "Il tour include chauffeur privato e i principali checkpoint: Colosseo, Fontana di Trevi, Piazza di Spagna, Circo Massimo, Pantheon e Gianicolo.",
+    faq4Question: "Posso pagare direttamente l'autista?", faq4Answer: "Si. Puoi pagare direttamente l'autista, con tutti i dettagli della prenotazione confermati in anticipo su WhatsApp.",
+    faq5Question: "Perche scegliere LuxWay rispetto ad altre compagnie?", faq5Answer: "LuxWay unisce prezzi fissi, autisti NCC autorizzati, veicoli premium puliti, puntualita, monitoraggio volo e coordinamento diretto via WhatsApp o email. Parli con il team prima della corsa, cosi ogni dettaglio e chiaro prima del pickup.",
     airportDesc: "Transfer privati da Fiumicino e Ciampino con monitoraggio volo, meet & greet, prezzo fisso e coordinamento WhatsApp.",
     cruiseDesc: "Transfer comodi tra Roma, aeroporti e Porto di Civitavecchia, organizzati su imbarco e sbarco.",
     hourlyDesc: "Chauffeur privato per shopping, meeting, eventi, ristoranti e fermate multiple a Roma.",
     cityDesc: "Transfer privati in tutta Italia, inclusi Roma Firenze, Napoli, Positano e Costiera Amalfitana.",
-    tourDesc: "Tour panoramico di 3 ore con soste foto, supporto audio guida e principali attrazioni di Roma, Colosseo incluso."
+    tourDesc: "Tour panoramico di 3 ore con chauffeur privato, pensato per vivere le viste piu iconiche di Roma in totale comfort, con tempo per soste foto eleganti.",
+    tourPointColosseum: "Colosseo", tourPointTrevi: "Fontana di Trevi", tourPointSpagna: "Piazza di Spagna", tourPointCircus: "Circo Massimo", tourPointPantheon: "Pantheon", tourPointGianicolo: "Gianicolo", bookTour: "Prenota Tour"
   }
 };
 
@@ -53,6 +70,15 @@ const vehicles = {
 };
 
 const services = {
+  tour: {
+    label: "Rome Panoramic Tour",
+    routes: [],
+    prices: { suv: 200, van: 350 },
+    note: "3-hour panoramic tour",
+    fields() {
+      return [["Pickup Address", "text", "address"], ["Tour Date", "date"], ["Tour Start Time", "time"], ["Language", "select", ["English", "Italian", "Spanish", "French"]], ["Passengers", "number"], ["Customer Name", "text"], ["WhatsApp Number", "tel"], ["Special Requests", "textarea"]];
+    }
+  },
   airport: {
     label: "Airport Transfer",
     routeLabel: "Transfer Direction",
@@ -70,7 +96,7 @@ const services = {
     label: "Cruise Port Transfer",
     routeLabel: "Select Route",
     routes: ["Port → Address", "Address → Port", "Port → Airport", "Airport → Port"],
-    prices: { suv: 170, van: 190 },
+    prices: { suv: 160, van: 190 },
     note: "Fixed Civitavecchia transfer price",
     fields(route) {
       const map = {
@@ -99,19 +125,10 @@ const services = {
     fields() {
       return [["Departure Address", "text", "address"], ["Destination Address", "text", "address"], ["Date", "date"], ["Time", "time"], ["Passengers", "number"], ["Luggage", "text"], ["Customer Name", "text"], ["WhatsApp Number", "tel"], ["Special Requests", "textarea"]];
     }
-  },
-  tour: {
-    label: "Rome Panoramic Tour",
-    routes: [],
-    prices: { suv: 200, van: 350 },
-    note: "3-hour panoramic tour",
-    fields() {
-      return [["Pickup Address", "text", "address"], ["Tour Date", "date"], ["Tour Start Time", "time"], ["Language", "select", ["English", "Italian", "Spanish", "French"]], ["Passengers", "number"], ["Customer Name", "text"], ["WhatsApp Number", "tel"], ["Special Requests", "textarea"]];
-    }
   }
 };
 
-const state = { service: "airport", route: "Airport → Address", airport: "Fiumicino Airport (FCO)", vehicle: "suv", hours: 3 };
+const state = { service: "tour", route: "", airport: "Fiumicino Airport (FCO)", vehicle: "suv", hours: 3 };
 const serviceSelect = document.querySelector("#serviceSelect");
 const routeBlock = document.querySelector("#routeBlock");
 const airportBlock = document.querySelector("#airportBlock");
@@ -285,10 +302,17 @@ document.querySelector("#bookingForm").addEventListener("submit", (event) => {
     if (value) lines.push(`${key}: ${value}`);
   });
   lines.push("", "Thank you.");
-  const message = encodeURIComponent(lines.join("\n"));
+  const body = lines.join("\n");
+  const channel = event.submitter?.dataset.submitChannel || "whatsapp";
   if (window.fbq) fbq("track", "Lead", { content_name: details.Service });
+  if (channel === "email") {
+    if (window.gtag) gtag("event", "booking_email_click", { service: details.Service });
+    const subject = encodeURIComponent(`Booking request - ${details.Service}`);
+    window.location.href = `mailto:${BOOKING_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
+    return;
+  }
   if (window.gtag) gtag("event", "booking_whatsapp_click", { service: details.Service });
-  window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, "_blank", "noopener");
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
 });
 
 serviceSelect.addEventListener("change", () => {

@@ -29,7 +29,7 @@
     <header class="site-header">
       <a class="brand" href="#top" aria-label="LuxWay Drivers home">
         <img class="brand-logo" src="assets/images/luxway-logo.png" alt="LuxWay logo">
-        <span><strong>LuxWay</strong><small>Drivers Rome</small></span>
+        <span><strong>LuxWay</strong><small>Rome</small></span>
       </a>
       <nav class="nav" aria-label="Primary navigation">
         <a href="#booking" data-i18n="navBook">Book</a>
@@ -50,7 +50,7 @@
         <img src="assets/images/hero-rome-chauffeur.png" alt="Black luxury chauffeur vehicles in Rome near the Colosseum">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <p class="eyebrow" data-i18n="eyebrow">Licensed NCC Service in Rome</p>
+          <p class="eyebrow" data-i18n="eyebrow">NCC in Rome</p>
           <h1 id="hero-title" data-i18n="headline">Private Transfers in Rome</h1>
           <p class="hero-sub" data-i18n="subheadline">Fixed Prices • Professional Chauffeur Service • WhatsApp Booking</p>
           <div class="trust-row" aria-label="Trust badges">
@@ -68,13 +68,17 @@
       </section>
 
       <section class="service-strip" aria-label="Main services">
+        <article class="service-card" data-service-jump="tour">
+          <img src="assets/images/rome-panoramic-tour.png" alt="Premium vehicle with views of Rome landmarks">
+          <div><h2 data-i18n="tourTitle">Rome Panoramic Tour</h2><p data-i18n="tourCardText">3 Hours • Rome Highlights</p><strong>From €200</strong></div>
+        </article>
         <article class="service-card" data-service-jump="airport">
           <img src="assets/images/airport-transfer.png" alt="Professional chauffeur welcoming passengers at Rome airport">
           <div><h2 data-i18n="airportTitle">Airport Transfers</h2><p>Fiumicino & Ciampino</p><strong>From €65</strong></div>
         </article>
         <article class="service-card" data-service-jump="cruise">
           <img src="assets/images/cruise-port-transfer.png" alt="Luxury chauffeur van at Civitavecchia cruise port">
-          <div><h2 data-i18n="cruiseTitle">Cruise Port Transfers</h2><p>Civitavecchia Port</p><strong>From €170</strong></div>
+          <div><h2 data-i18n="cruiseTitle">Cruise Port Transfers</h2><p>Civitavecchia Port</p><strong>From €160</strong></div>
         </article>
         <article class="service-card" data-service-jump="hourly">
           <img src="assets/images/hourly-chauffeur.png" alt="Professional chauffeur beside a premium vehicle">
@@ -83,10 +87,6 @@
         <article class="service-card" data-service-jump="city">
           <img src="assets/images/city-to-city.png" alt="Luxury vehicle driving through Italian landscapes">
           <div><h2 data-i18n="cityTitle">City to City Transfers</h2><p>Across Italy</p><strong data-i18n="quote">Request a Quote</strong></div>
-        </article>
-        <article class="service-card" data-service-jump="tour">
-          <img src="assets/images/rome-panoramic-tour.png" alt="Premium vehicle with views of Rome landmarks">
-          <div><h2 data-i18n="tourTitle">Rome Panoramic Tour</h2><p>3 Hours</p><strong>From €200</strong></div>
         </article>
       </section>
 
@@ -103,8 +103,8 @@
             <select id="serviceSelect"></select>
             <div class="price-panel" aria-live="polite">
               <span data-i18n="yourPrice">Your Price</span>
-              <strong id="priceValue">€65</strong>
-              <small id="priceNote">Fixed transfer price</small>
+              <strong id="priceValue">€200</strong>
+              <small id="priceNote">3-hour panoramic tour</small>
             </div>
           </aside>
 
@@ -114,7 +114,10 @@
             <div id="hoursBlock" class="form-block"></div>
             <div id="vehicleBlock" class="vehicle-grid"></div>
             <div id="dynamicFields" class="field-grid"></div>
-            <button class="btn primary full" type="submit" data-i18n="openWhatsapp">Open WhatsApp with Booking Details</button>
+            <div class="booking-actions">
+              <button class="btn primary full" type="submit" data-submit-channel="whatsapp" data-i18n="openWhatsapp">Send Request via WhatsApp</button>
+              <button class="btn light full" type="submit" data-submit-channel="email" data-i18n="sendEmail">Send Request by Email</button>
+            </div>
           </form>
         </div>
       </section>
@@ -131,11 +134,14 @@
         </div>
         <div class="center-actions">
           <a class="btn dark" href="https://it.tripadvisor.ch/Attraction_Review-g187791-d33680217-Reviews-LuxWay-Rome_Lazio.html" target="_blank" rel="noopener">TripAdvisor</a>
-          <a class="btn light" href="#booking" data-i18n="viewReviews">View All Reviews</a>
         </div>
       </section>
 
       <section class="deep-services" id="services">
+        <article class="deep-card tour-card-detail">
+          <img src="assets/images/rome-panoramic-tour.png" alt="Rome panoramic chauffeur tour">
+          <div><h2 data-i18n="tourTitle">Rome Panoramic Tour</h2><p data-i18n="tourDesc">A 3-hour panoramic chauffeur tour designed to enjoy Rome’s most iconic views in total comfort, with time for elegant photo stops.</p><ul><li data-i18n="tourPointColosseum">Colosseum</li><li data-i18n="tourPointTrevi">Trevi Fountain</li><li data-i18n="tourPointSpagna">Spanish Steps</li><li data-i18n="tourPointCircus">Circus Maximus</li><li data-i18n="tourPointPantheon">Pantheon</li><li data-i18n="tourPointGianicolo">Gianicolo Hill</li></ul><a class="btn dark" href="#booking" data-service-jump="tour" data-i18n="bookTour">Book Tour</a></div>
+        </article>
         <article class="deep-card">
           <img src="assets/images/airport-transfer.png" alt="Airport transfer chauffeur in Rome">
           <div><h2 data-i18n="airportTitle">Airport Transfers</h2><p data-i18n="airportDesc">Private transfers from Fiumicino and Ciampino with flight monitoring, meet and greet, fixed pricing and direct WhatsApp coordination.</p><ul><li>Flight monitoring</li><li>Meet & Greet</li><li>Fixed pricing</li></ul><a class="btn dark" href="#booking" data-service-jump="airport">Book Airport Transfer</a></div>
@@ -152,10 +158,6 @@
           <img src="assets/images/city-to-city.png" alt="Private transfer across Italy">
           <div><h2 data-i18n="cityTitle">City to City Transfers</h2><p data-i18n="cityDesc">Private transfers across Italy, including Rome to Florence, Naples, Positano and the Amalfi Coast.</p><ul><li>Rome → Florence</li><li>Rome → Naples</li><li>Rome → Amalfi Coast</li></ul><a class="btn dark" href="#booking" data-service-jump="city">Request Quote</a></div>
         </article>
-        <article class="deep-card">
-          <img src="assets/images/rome-panoramic-tour.png" alt="Rome panoramic chauffeur tour">
-          <div><h2 data-i18n="tourTitle">Rome Panoramic Tour</h2><p data-i18n="tourDesc">A 3-hour panoramic tour with photo stops, audio guide support and Rome’s main landmarks, including the Colosseum.</p><ul><li>Photo stops</li><li>Audio guide</li><li>Main attractions</li></ul><a class="btn dark" href="#booking" data-service-jump="tour">Book Tour</a></div>
-        </article>
       </section>
 
       <section class="features" aria-label="Service features">
@@ -163,6 +165,36 @@
         <article><span>24</span><strong>24/7 Availability</strong></article>
         <article><span>€</span><strong>Fixed Prices</strong></article>
         <article><span>★</span><strong>Top Rated Service</strong></article>
+      </section>
+
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="section-intro">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title" data-i18n="faqTitle">Frequently Asked Questions</h2>
+          <p data-i18n="faqText">Clear answers before booking your LuxWay private chauffeur service in Rome.</p>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary data-i18n="faq1Question">How do I book a transfer?</summary>
+            <p data-i18n="faq1Answer">Select the service, vehicle and travel details. The complete request opens directly on WhatsApp, where we confirm availability and final details.</p>
+          </details>
+          <details>
+            <summary data-i18n="faq2Question">Are prices fixed?</summary>
+            <p data-i18n="faq2Answer">Airport, port and Rome panoramic tour prices are fixed for the selected vehicle. City-to-city transfers are quoted by WhatsApp.</p>
+          </details>
+          <details>
+            <summary data-i18n="faq3Question">What is included in the 3-hour panoramic tour?</summary>
+            <p data-i18n="faq3Answer">The tour includes a private chauffeur and the main checkpoints: Colosseum, Trevi Fountain, Spanish Steps, Circus Maximus, Pantheon and Gianicolo Hill.</p>
+          </details>
+          <details>
+            <summary data-i18n="faq4Question">Can I pay the driver directly?</summary>
+            <p data-i18n="faq4Answer">Yes. You can pay directly to the driver, and the booking details are confirmed in advance through WhatsApp.</p>
+          </details>
+          <details>
+            <summary data-i18n="faq5Question">Why choose LuxWay instead of another company?</summary>
+            <p data-i18n="faq5Answer">LuxWay combines fixed prices, licensed NCC drivers, clean premium vehicles, punctual service, flight monitoring and direct WhatsApp or email coordination. You speak with the team before the ride, so every detail is clear before pickup.</p>
+          </details>
+        </div>
       </section>
     </main>
 

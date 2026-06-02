@@ -75,6 +75,7 @@ button, input, select, textarea { font: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 .hero-overlay {
   position: absolute;
@@ -149,7 +150,13 @@ h1 {
   cursor: pointer;
 }
 .service-card img { width: 104px; height: 100%; object-fit: cover; }
-.service-card div { padding: 14px 14px 14px 0; }
+.service-card div {
+  padding: 14px 14px 14px 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
 .service-card h2 { margin-bottom: 3px; font-size: 16px; }
 .service-card p { margin-bottom: 8px; color: var(--muted); font-size: 14px; }
 .service-card strong { color: var(--gold); }
@@ -204,16 +211,26 @@ textarea { min-height: 92px; padding-top: 12px; resize: vertical; }
 .vehicle-card {
   border: 2px solid var(--line);
   background: #fff;
+  color: var(--ink);
+  text-align: center;
   overflow: hidden;
   cursor: pointer;
 }
 .vehicle-card.selected { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(182,138,53,.16); }
 .vehicle-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.vehicle-card div { padding: 14px; }
-.vehicle-card h3 { margin: 0 0 8px; }
+.vehicle-card div {
+  padding: 14px;
+  display: grid;
+  justify-items: center;
+}
+.vehicle-card h3 { margin: 0 0 8px; color: var(--ink); }
 .vehicle-card p { margin: 3px 0; color: var(--muted); font-size: 14px; }
 .vehicle-card strong { display: block; margin-top: 10px; color: var(--gold); font-size: 22px; }
 .field-grid { display: grid; gap: 12px; margin-bottom: 18px; }
+.booking-actions {
+  display: grid;
+  gap: 10px;
+}
 
 .reviews { background: #fff; }
 .review-grid {
@@ -237,10 +254,29 @@ textarea { min-height: 92px; padding-top: 12px; resize: vertical; }
   box-shadow: var(--shadow);
 }
 .deep-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
-.deep-card div { padding: clamp(20px, 4vw, 42px); }
+.deep-card div {
+  padding: clamp(20px, 4vw, 42px);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
 .deep-card h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.05; margin-bottom: 12px; }
 .deep-card p, .deep-card li { color: var(--muted); }
-.deep-card ul { display: grid; gap: 8px; padding-left: 20px; margin-bottom: 22px; }
+.deep-card ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 0;
+  margin-bottom: 22px;
+  list-style-position: inside;
+  justify-items: center;
+}
+.tour-card-detail div {
+  justify-items: center;
+}
+.tour-card-detail p { max-width: 620px; }
+.tour-card-detail ul {
+  width: min(360px, 100%);
+}
 
 .features {
   display: grid;
@@ -259,6 +295,51 @@ textarea { min-height: 92px; padding-top: 12px; resize: vertical; }
   padding: 18px;
 }
 .features span { display: grid; place-items: center; width: 44px; height: 44px; background: var(--gold); color: #111; font-weight: 900; }
+
+.faq {
+  padding: 72px 18px;
+  background: var(--paper);
+}
+.faq-list {
+  width: min(900px, 100%);
+  margin: auto;
+  display: grid;
+  gap: 12px;
+}
+.faq-list details {
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.faq-list summary {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  color: var(--ink);
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  color: #111;
+}
+.faq-list details[open] summary::after { content: "-"; }
+.faq-list p {
+  margin: 0;
+  padding: 0 18px 18px;
+  color: var(--muted);
+}
 
 .footer {
   display: grid;
@@ -299,6 +380,7 @@ textarea { min-height: 92px; padding-top: 12px; resize: vertical; }
   .option-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .vehicle-grid, .review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .booking-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .field.full { grid-column: 1 / -1; }
   .deep-card { grid-template-columns: 1fr 1fr; align-items: center; }
   .deep-card:nth-child(even) img { order: 2; }
@@ -319,7 +401,34 @@ textarea { min-height: 92px; padding-top: 12px; resize: vertical; }
   .brand small, .nav { display: none; }
   .brand-logo { width: 58px; height: 58px; }
   .wa-small { display: none; }
-  .hero { min-height: 88vh; }
-  .hero-content { padding-bottom: 34px; }
+  .hero {
+    min-height: 0;
+    display: block;
+    background: #05070a;
+  }
+  .hero > img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+  .hero-overlay { display: none; }
+  .hero-content {
+    padding: 26px 18px 34px;
+    background: linear-gradient(180deg, #05070a, #0c0f12);
+  }
+  h1 { font-size: 42px; line-height: 1; }
+  .hero-sub { font-size: 17px; }
   .trust-row span { font-size: 12px; }
+  .service-card { grid-template-columns: 116px 1fr; }
+  .service-card img { width: 116px; object-position: center; }
+  .vehicle-card,
+  .vehicle-card h3 {
+    color: var(--ink);
+    -webkit-text-fill-color: var(--ink);
+  }
+  .faq { padding: 58px 18px; }
+  .faq-list summary { align-items: flex-start; }
 }

@@ -31,8 +31,8 @@ const translations = {
     badgeFixed: "Fixed Prices", badgeFees: "No Hidden Fees", badgeFlight: "Flight Monitoring", badgeEnglish: "English Speaking Driver", badgePay: "Pay Directly to the Driver",
     bookNow: "Book Now", airportTitle: "Airport Transfers", cruiseTitle: "Cruise Port Transfers", hourlyTitle: "Hourly Chauffeur Service", cityTitle: "City to City Transfers", tourTitle: "Rome Panoramic Tour",
     tourCardText: "3 Hours • Rome Highlights",
-    quote: "Request a Quote", bookingEyebrow: "Book in under 60 seconds", bookingTitle: "Fast WhatsApp Booking",
-    bookingText: "Select your service, vehicle and details. Your complete booking request opens directly in WhatsApp.",
+    quote: "Request a Quote", bookingEyebrow: "Book in under 60 seconds", bookingTitle: "Fast Booking",
+    bookingText: "Select your service, vehicle and details. Your complete booking request opens directly in WhatsApp or by email.",
     selectService: "Select Service", yourPrice: "Your Price", openWhatsapp: "Send Request via WhatsApp", sendEmail: "Send Request by Email",
     reviewsTitle: "Premium Reviews", reviewsText: "Top-rated private chauffeur service for Rome arrivals, cruise transfers and private tours.",
     faqTitle: "Frequently Asked Questions", faqText: "Clear answers before booking your LuxWay private chauffeur service in Rome.",
@@ -56,8 +56,8 @@ const translations = {
     badgeFixed: "Prezzi Fissi", badgeFees: "Nessun Costo Nascosto", badgeFlight: "Monitoraggio Volo", badgeEnglish: "Autista parla inglese", badgePay: "Paghi direttamente all'autista",
     bookNow: "Prenota Ora", airportTitle: "Transfer Aeroporto", cruiseTitle: "Transfer Porto Crociere", hourlyTitle: "Chauffeur a Disposizione", cityTitle: "Transfer Citta a Citta", tourTitle: "Tour Panoramico di Roma",
     tourCardText: "3 Ore • Tappe Iconiche",
-    quote: "Richiedi Preventivo", bookingEyebrow: "Prenota in meno di 60 secondi", bookingTitle: "Prenotazione WhatsApp Rapida",
-    bookingText: "Seleziona servizio, veicolo e dettagli. La richiesta completa si apre direttamente su WhatsApp.",
+    quote: "Richiedi Preventivo", bookingEyebrow: "Prenota in meno di 60 secondi", bookingTitle: "Prenotazione Rapida",
+    bookingText: "Seleziona servizio, veicolo e dettagli. La richiesta completa si apre direttamente su WhatsApp o via email.",
     selectService: "Seleziona Servizio", yourPrice: "Il tuo prezzo", openWhatsapp: "Invia la richiesta tramite WhatsApp", sendEmail: "Invia richiesta via email",
     reviewsTitle: "Recensioni Premium", reviewsText: "Servizio chauffeur top-rated per arrivi a Roma, transfer crociere e tour privati.",
     faqTitle: "Domande Frequenti", faqText: "Risposte chiare prima di prenotare il tuo servizio chauffeur privato LuxWay a Roma.",
@@ -132,8 +132,8 @@ const services = {
   hourly: {
     label: "Hourly Chauffeur Service",
     routes: [],
-    prices: { suv: 50, van: 50 },
-    note: "€50 per hour",
+    prices: { suv: 50, van: 80 },
+    note: "Hourly chauffeur price",
     fields() {
       return [["Pickup Address", "text", "address"], ["Date", "date"], ["Start Time", "time"], ["Passengers", "number"], ["Customer Name", "text"], ["WhatsApp Number", "tel"], ["Special Requests", "textarea"]];
     }
@@ -171,7 +171,7 @@ function money(value) {
 }
 
 function currentPrice() {
-  if (state.service === "hourly") return state.hours * 50;
+  if (state.service === "hourly") return state.hours * services.hourly.prices[state.vehicle];
   return services[state.service].prices[state.vehicle];
 }
 
@@ -275,7 +275,7 @@ function render() {
     card.className = `vehicle-card ${state.vehicle === key ? "selected" : ""}`;
     const maxPassengers = state.service === "tour" && key === "van" ? "Maximum 7 passengers" : vehicle.passengers;
     card.innerHTML = `<img src="${vehicle.image}" alt="${vehicle.name}"><div><h3>${vehicle.name}</h3><p>👤 ${maxPassengers}</p><p>🧳 ${vehicle.luggage}</p><strong>${money(service.prices[key])}</strong></div>`;
-    if (state.service === "hourly") card.querySelector("strong").textContent = "€50/hour";
+    if (state.service === "hourly") card.querySelector("strong").textContent = `${money(service.prices[key])}/hour`;
     card.addEventListener("click", () => {
       state.vehicle = key;
       render();

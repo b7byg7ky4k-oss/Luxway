@@ -1,9 +1,30 @@
 const WA_NUMBER = "393290937951";
 const BOOKING_EMAIL = "luxwaydrivers@gmail.com";
 
+const seo = {
+  en: {
+    title: "Private Transfers Rome | NCC Chauffeur Service | LuxWay",
+    description: "LuxWay offers private NCC transfers in Rome with fixed prices, English-speaking chauffeurs, airport transfers, Civitavecchia cruise port transfers, hourly service and 3-hour Rome panoramic tours.",
+    keywords: "private transfers Rome, NCC Rome, chauffeur service Rome, Rome airport transfer, Fiumicino transfer, Ciampino transfer, Civitavecchia transfer, Rome panoramic tour, private driver Rome, luxury van Rome",
+    ogTitle: "Private Transfers Rome | NCC Chauffeur Service | LuxWay",
+    ogDescription: "Fixed-price NCC chauffeur service in Rome for airports, Civitavecchia port, hourly rides, city transfers and Rome panoramic tours.",
+    twitterDescription: "Book private NCC transfers in Rome by WhatsApp or email: airports, Civitavecchia, hourly chauffeur service and panoramic tours.",
+    locale: "en_US"
+  },
+  it: {
+    title: "Transfer Privati Roma | Servizio NCC con Chauffeur | LuxWay",
+    description: "LuxWay offre transfer privati NCC a Roma con prezzi fissi, autisti professionali, transfer Fiumicino e Ciampino, transfer Civitavecchia, chauffeur a disposizione e tour panoramici di Roma.",
+    keywords: "transfer privati Roma, NCC Roma, chauffeur Roma, transfer aeroporto Roma, transfer Fiumicino, transfer Ciampino, transfer Civitavecchia, tour panoramico Roma, autista privato Roma, van luxury Roma",
+    ogTitle: "Transfer Privati Roma | Servizio NCC con Chauffeur | LuxWay",
+    ogDescription: "Servizio NCC a Roma con prezzi fissi per aeroporti, porto di Civitavecchia, chauffeur a disposizione, transfer privati e tour panoramici.",
+    twitterDescription: "Prenota transfer privati NCC a Roma via WhatsApp o email: aeroporti, Civitavecchia, chauffeur a disposizione e tour panoramici.",
+    locale: "it_IT"
+  }
+};
+
 const translations = {
   en: {
-    navBook: "Book", navServices: "Services", navReviews: "Reviews",
+    navBook: "Book", navServices: "Services", navReviews: "Reviews", navFaq: "FAQ",
     eyebrow: "NCC in Rome",
     headline: "Private Transfers in Rome",
     subheadline: "Fixed Prices • Professional Chauffeur Service • WhatsApp Booking",
@@ -28,7 +49,7 @@ const translations = {
     tourPointColosseum: "Colosseum", tourPointTrevi: "Trevi Fountain", tourPointSpagna: "Spanish Steps", tourPointCircus: "Circus Maximus", tourPointPantheon: "Pantheon", tourPointGianicolo: "Gianicolo Hill", bookTour: "Book Tour"
   },
   it: {
-    navBook: "Prenota", navServices: "Servizi", navReviews: "Recensioni",
+    navBook: "Prenota", navServices: "Servizi", navReviews: "Recensioni", navFaq: "FAQ",
     eyebrow: "NCC a Roma",
     headline: "Transfer Privati a Roma",
     subheadline: "Prezzi Fissi • Chauffeur Professionale • Prenotazione WhatsApp",
@@ -331,10 +352,34 @@ document.querySelectorAll("[data-service-jump]").forEach((item) => {
   });
 });
 
+function setMeta(selector, value) {
+  const tag = document.querySelector(selector);
+  if (!tag) return;
+  if (tag.hasAttribute("content")) {
+    tag.setAttribute("content", value);
+  } else {
+    tag.textContent = value;
+  }
+}
+
+function updateSeo(lang) {
+  const content = seo[lang];
+  document.title = content.title;
+  setMeta('meta[name="description"]', content.description);
+  setMeta('meta[name="keywords"]', content.keywords);
+  setMeta('meta[name="language"]', lang === "it" ? "Italian" : "English");
+  setMeta('meta[property="og:title"]', content.ogTitle);
+  setMeta('meta[property="og:description"]', content.ogDescription);
+  setMeta('meta[property="og:locale"]', content.locale);
+  setMeta('meta[name="twitter:title"]', content.ogTitle);
+  setMeta('meta[name="twitter:description"]', content.twitterDescription);
+}
+
 document.querySelectorAll(".lang").forEach((button) => {
   button.addEventListener("click", () => {
     const lang = button.dataset.lang;
     document.documentElement.lang = lang;
+    updateSeo(lang);
     document.querySelectorAll(".lang").forEach((el) => el.classList.toggle("active", el === button));
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.dataset.i18n;

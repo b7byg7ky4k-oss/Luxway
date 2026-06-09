@@ -1,6 +1,7 @@
 const WA_NUMBER = "393290937951";
 const BOOKING_EMAIL = "luxwaydrivers@gmail.com";
 const ASSET_BASE = window.LUXWAY_ASSET_BASE || "";
+const TRIPADVISOR_URL = "https://it.tripadvisor.ch/Attraction_Review-g187791-d33680217-Reviews-LuxWay-Rome_Lazio.html";
 
 const seo = {
   en: {
@@ -147,6 +148,58 @@ const services = {
     fields() {
       return [["Departure Address", "text", "address"], ["Destination Address", "text", "address"], ["Date", "date"], ["Time", "time"], ["Passengers", "number"], ["Luggage", "text"], ["Customer Name", "text"], ["WhatsApp Number", "tel"], ["Special Requests", "textarea"]];
     }
+  }
+};
+
+const servicePages = [
+  ["Home", `${ASSET_BASE}index.html#top`],
+  ["Rome Panoramic Tour", `${ASSET_BASE}services/rome-panoramic-tour/`],
+  ["Airport Transfers", `${ASSET_BASE}services/rome-airport-transfers/`],
+  ["Cruise Port Transfers", `${ASSET_BASE}services/cruise-port-transfers/`],
+  ["Hourly Chauffeur Service", `${ASSET_BASE}services/hourly-chauffeur-service/`],
+  ["City to City Transfers", `${ASSET_BASE}services/city-to-city-transfers/`]
+];
+
+const serviceReviewContent = {
+  tour: {
+    title: "Rome Panoramic Tour Reviews",
+    text: "Travelers usually value the relaxed pace, scenic photo stops and the comfort of seeing Rome's highlights with a private chauffeur.",
+    cards: [
+      ["Panoramic Stops", "Colosseum, Trevi Fountain, Spanish Steps and Gianicolo are easy to enjoy without changing taxis."],
+      ["Comfortable Timing", "A 3-hour private route keeps the experience elegant, flexible and simple for couples or families."]
+    ]
+  },
+  airport: {
+    title: "Airport Transfer Reviews",
+    text: "Airport clients usually focus on punctual pickup, flight monitoring, luggage help and clear WhatsApp coordination.",
+    cards: [
+      ["Smooth Arrivals", "Flight details help coordinate the meeting time at Fiumicino or Ciampino."],
+      ["Easy Communication", "Direct WhatsApp updates make the transfer clear before landing and after pickup."]
+    ]
+  },
+  cruise: {
+    title: "Cruise Port Transfer Reviews",
+    text: "Cruise guests usually appreciate port timing, luggage space and reliable connections between Civitavecchia, Rome and the airports.",
+    cards: [
+      ["Cruise Timing", "Pickup is planned around boarding and disembarkation, with ship details added in the form."],
+      ["Luggage Comfort", "SUV/Sedan and Luxury Van options help match the vehicle to passengers and bags."]
+    ]
+  },
+  hourly: {
+    title: "Hourly Chauffeur Reviews",
+    text: "Hourly clients usually mention flexibility, multiple stops and the convenience of having one private driver available in Rome.",
+    cards: [
+      ["Multiple Stops", "Ideal for restaurants, shopping, meetings, events and changing plans during the day."],
+      ["Flexible Schedule", "The service starts from 3 hours and can be adapted around your route."]
+    ]
+  },
+  city: {
+    title: "City to City Transfer Reviews",
+    text: "Long-distance clients usually value private comfort, luggage assistance and custom routes across Italy.",
+    cards: [
+      ["Private Long Rides", "Useful for Rome to Florence, Naples, Positano and Amalfi Coast routes."],
+      ["Custom Quote", "The request form collects route, passengers and luggage so the quote can be precise."]
+    ]
   }
 };
 
@@ -446,7 +499,7 @@ function initCarousels() {
 }
 
 function initRevealCards() {
-  const cards = document.querySelectorAll(".service-strip .service-card, .other-services .service-card, .deep-services .deep-card");
+  const cards = document.querySelectorAll(".service-strip .service-card, .other-services .service-card, .deep-services .deep-card, .service-review-grid article");
   if (!cards.length) return;
 
   cards.forEach((card, index) => {
@@ -470,7 +523,87 @@ function initRevealCards() {
   cards.forEach((card) => observer.observe(card));
 }
 
+function initMobileMenu() {
+  const header = document.querySelector(".site-header");
+  if (!header || header.querySelector(".mobile-menu-button")) return;
+
+  const button = document.createElement("button");
+  button.className = "mobile-menu-button";
+  button.type = "button";
+  button.setAttribute("aria-expanded", "false");
+  button.setAttribute("aria-controls", "mobile-menu-panel");
+  button.textContent = "Menu";
+
+  const panel = document.createElement("div");
+  panel.className = "mobile-menu-panel";
+  panel.id = "mobile-menu-panel";
+  panel.hidden = true;
+
+  const quickLinks = services[FIXED_SERVICE]
+    ? [
+        ["Book This Service", "#booking"],
+        ["Reviews", "#service-reviews"],
+        ["Other Services", "#other-services"]
+      ]
+    : [
+        ["Fast Booking", "#booking"],
+        ["Reviews", "#reviews"],
+        ["FAQ", "#faq"]
+      ];
+
+  const links = [...quickLinks, ...servicePages];
+  panel.innerHTML = links.map(([label, href]) => `<a href="${href}">${label}</a>`).join("");
+
+  button.addEventListener("click", () => {
+    const isOpen = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!isOpen));
+    panel.hidden = isOpen;
+    document.body.classList.toggle("mobile-menu-open", !isOpen);
+  });
+
+  panel.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      button.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+      document.body.classList.remove("mobile-menu-open");
+    });
+  });
+
+  header.append(button, panel);
+}
+
+function initServiceReviews() {
+  if (!services[FIXED_SERVICE] || document.querySelector("#service-reviews")) return;
+  const content = serviceReviewContent[FIXED_SERVICE];
+  const anchor = document.querySelector(".faq") || document.querySelector("#other-services");
+  if (!content || !anchor) return;
+
+  const section = document.createElement("section");
+  section.className = "service-reviews";
+  section.id = "service-reviews";
+  section.setAttribute("aria-labelledby", "service-reviews-title");
+  section.innerHTML = `
+    <div class="section-intro">
+      <p class="eyebrow">TripAdvisor</p>
+      <h2 id="service-reviews-title">${content.title}</h2>
+      <p>${content.text}</p>
+    </div>
+    <div class="service-review-grid">
+      ${content.cards.map(([title, text]) => `<article><strong>${title}</strong><p>${text}</p><span>★★★★★</span></article>`).join("")}
+    </div>
+    <div class="center-actions">
+      <a class="btn dark" href="${TRIPADVISOR_URL}" target="_blank" rel="noopener">Read LuxWay Reviews on TripAdvisor</a>
+    </div>
+  `;
+  anchor.before(section);
+
+  const reviewLink = document.querySelector('.site-header .nav a[href*="#reviews"]');
+  if (reviewLink) reviewLink.setAttribute("href", "#service-reviews");
+}
+
 render();
 initCarousels();
+initMobileMenu();
+initServiceReviews();
 initRevealCards();
 loadGoogleMaps();

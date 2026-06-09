@@ -302,6 +302,50 @@ function vehicleIcon(type) {
   return icons[type] || "";
 }
 
+function benefitIcon(title) {
+  const icons = {
+    clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>',
+    driver: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17a5 5 0 0 1 10 0"/><circle cx="12" cy="8" r="3"/><path d="M4 20h16"/></svg>',
+    camera: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l1.5-2h5L16 7h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3Z"/><circle cx="12" cy="13" r="3"/></svg>',
+    tag: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 12 20 4 12V4h8l8 8Z"/><path d="M8 8h.01"/></svg>',
+    plane: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l18-7-7 18-3-8-8-3Z"/><path d="M11 14 21 4"/></svg>',
+    meet: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12a4 4 0 1 1 8 0"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M9 16h6"/></svg>',
+    luggage: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M7 7h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/></svg>',
+    route: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19 23a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M5 7v3a4 4 0 0 0 4 4h6a4 4 0 0 1 4 4"/></svg>',
+    car: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16h14l-2-6H7l-2 6Z"/><path d="M7 16v2M17 16v2"/><path d="M4 13h16"/></svg>',
+    quote: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v12H4z"/><path d="M8 11h8M8 15h5"/><path d="M16 3v4M8 3v4"/></svg>'
+  };
+  const key = title.toLowerCase();
+  if (key.includes("flight")) return icons.plane;
+  if (key.includes("meet")) return icons.meet;
+  if (key.includes("price") || key.includes("fixed")) return icons.tag;
+  if (key.includes("chauffeur") || key.includes("driver")) return icons.driver;
+  if (key.includes("photo")) return icons.camera;
+  if (key.includes("timing") || key.includes("hours") || key.includes("minimum")) return icons.clock;
+  if (key.includes("luggage")) return icons.luggage;
+  if (key.includes("route") || key.includes("stops")) return icons.route;
+  if (key.includes("vehicle") || key.includes("airport")) return icons.car;
+  if (key.includes("quote")) return icons.quote;
+  return icons.car;
+}
+
+function initBenefitCards() {
+  document.querySelectorAll(".landing-section").forEach((section) => {
+    const eyebrow = section.querySelector(".section-intro .eyebrow");
+    if (!eyebrow || eyebrow.textContent.trim().toLowerCase() !== "benefits") return;
+    section.classList.add("benefits-section");
+    section.querySelectorAll(".landing-card").forEach((card) => {
+      if (card.querySelector(".benefit-icon")) return;
+      const heading = card.querySelector("h3");
+      if (!heading) return;
+      const icon = document.createElement("span");
+      icon.className = "benefit-icon";
+      icon.innerHTML = benefitIcon(heading.textContent);
+      card.insertBefore(icon, heading);
+    });
+  });
+}
+
 function render() {
   const service = services[state.service];
   serviceSelect.value = state.service;
@@ -517,7 +561,7 @@ function initCarousels() {
 }
 
 function initRevealCards() {
-  const cards = document.querySelectorAll(".service-strip .service-card, .other-services .service-card, .deep-services .deep-card, .service-review-grid article");
+  const cards = document.querySelectorAll(".service-strip .service-card, .other-services .service-card, .deep-services .deep-card, .service-review-grid article, .benefits-section .landing-card");
   if (!cards.length) return;
 
   cards.forEach((card, index) => {
@@ -623,5 +667,6 @@ render();
 initCarousels();
 initMobileMenu();
 initServiceReviews();
+initBenefitCards();
 initRevealCards();
 loadGoogleMaps();

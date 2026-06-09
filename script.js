@@ -293,6 +293,15 @@ function renderField([label, type, extra]) {
   return wrap;
 }
 
+function vehicleIcon(type) {
+  const icons = {
+    people: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+    suitcase: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M7 7h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M9 11v6M15 11v6"/></svg>',
+    carry: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1"/><path d="M6 6h12v14H6z"/><path d="M9 20v2M15 20v2"/></svg>'
+  };
+  return icons[type] || "";
+}
+
 function render() {
   const service = services[state.service];
   serviceSelect.value = state.service;
@@ -337,7 +346,16 @@ function render() {
     card.type = "button";
     card.className = `vehicle-card ${state.vehicle === key ? "selected" : ""}`;
     const maxPassengers = state.service === "tour" && key === "van" ? "Maximum 7 passengers" : vehicle.passengers;
-    card.innerHTML = `<img src="${vehicle.image}" alt="${vehicle.name}"><div><h3>${vehicle.name}</h3><p>👤 ${maxPassengers}</p><p>🧳 ${vehicle.luggage}</p><strong>${money(service.prices[key])}</strong></div>`;
+    card.innerHTML = `
+      <img src="${vehicle.image}" alt="${vehicle.name}">
+      <div class="vehicle-card-body">
+        <h3>${vehicle.name}</h3>
+        <div class="vehicle-detail-list" aria-label="${vehicle.name} details">
+          <p>${vehicleIcon("people")} <span>${maxPassengers}</span></p>
+          <p>${vehicleIcon("suitcase")} <span>${vehicle.luggage}</span></p>
+        </div>
+        <strong>${money(service.prices[key])}</strong>
+      </div>`;
     if (state.service === "hourly") card.querySelector("strong").textContent = `${money(service.prices[key])}/hour`;
     card.addEventListener("click", () => {
       state.vehicle = key;

@@ -205,26 +205,26 @@
       </section>
 
       <section class="service-strip" aria-label="Main services">
-        <article class="service-card" data-service-jump="tour">
+        <a class="service-card" href="services/rome-panoramic-tour/">
           <img src="assets/images/rome-panoramic-tour.png" alt="Rome panoramic tour with private chauffeur and landmark views" loading="lazy">
           <div><h2 data-i18n="tourTitle">Rome Panoramic Tour</h2><p data-i18n="tourCardText">3 Hours • Rome Highlights</p><strong>From €200</strong></div>
-        </article>
-        <article class="service-card" data-service-jump="airport">
+        </a>
+        <a class="service-card" href="services/rome-airport-transfers/">
           <img src="assets/images/airport-transfer.png" alt="Private Rome airport transfer from Fiumicino and Ciampino" loading="lazy">
           <div><h2 data-i18n="airportTitle">Airport Transfers</h2><p>Fiumicino & Ciampino</p><strong>From €65</strong></div>
-        </article>
-        <article class="service-card" data-service-jump="cruise">
+        </a>
+        <a class="service-card" href="services/cruise-port-transfers/">
           <img src="assets/images/cruise-port-transfer.png" alt="Private Civitavecchia cruise port transfer with luxury chauffeur van" loading="lazy">
           <div><h2 data-i18n="cruiseTitle">Cruise Port Transfers</h2><p>Civitavecchia Port</p><strong>From €160</strong></div>
-        </article>
-        <article class="service-card" data-service-jump="hourly">
+        </a>
+        <a class="service-card" href="services/hourly-chauffeur-service/">
           <img src="assets/images/hourly-chauffeur.png" alt="Hourly chauffeur service in Rome with premium private driver" loading="lazy">
           <div><h2 data-i18n="hourlyTitle">Hourly Chauffeur Service</h2><p>Flexible private driver</p><strong>€50/hour</strong></div>
-        </article>
-        <article class="service-card" data-service-jump="city">
+        </a>
+        <a class="service-card" href="services/city-to-city-transfers/">
           <img src="assets/images/city-to-city.png" alt="City to city private transfer from Rome across Italy" loading="lazy">
           <div><h2 data-i18n="cityTitle">City to City Transfers</h2><p>Across Italy</p><strong data-i18n="quote">Request a Quote</strong></div>
-        </article>
+        </a>
       </section>
 
       <section class="booking-section" id="booking" aria-labelledby="booking-title">
@@ -236,8 +236,10 @@
 
         <div class="booking-shell">
           <aside class="booking-side">
-            <label for="serviceSelect" data-i18n="selectService">Select Service</label>
-            <select id="serviceSelect"></select>
+            <div class="service-picker">
+              <label for="serviceSelect" data-i18n="selectService">Select Service</label>
+              <select id="serviceSelect"></select>
+            </div>
             <div class="price-panel" aria-live="polite">
               <span data-i18n="yourPrice">Your Price</span>
               <strong id="priceValue">€200</strong>

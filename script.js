@@ -1,5 +1,6 @@
 const WA_NUMBER = "393290937951";
 const BOOKING_EMAIL = "luxwaydrivers@gmail.com";
+const ASSET_BASE = window.LUXWAY_ASSET_BASE || "";
 
 const seo = {
   en: {
@@ -78,13 +79,13 @@ const translations = {
 const vehicles = {
   suv: {
     name: "SUV or Sedan",
-    image: "assets/images/bmw-x3-black.png",
+    image: `${ASSET_BASE}assets/images/bmw-x3-black.png`,
     passengers: "Maximum 4 passengers",
     luggage: "2 large suitcases + 2 carry-ons or 4 small suitcases"
   },
   van: {
     name: "Luxury Van",
-    image: "assets/images/mercedes-v-class-black.png",
+    image: `${ASSET_BASE}assets/images/mercedes-v-class-black.png`,
     passengers: "Maximum 8 passengers",
     luggage: "Maximum 8 large suitcases"
   }
@@ -149,7 +150,9 @@ const services = {
   }
 };
 
-const state = { service: "tour", route: "", airport: "Fiumicino Airport (FCO)", vehicle: "suv", hours: 3 };
+const FIXED_SERVICE = document.body.dataset.fixedService || "";
+const INITIAL_SERVICE = services[FIXED_SERVICE] ? FIXED_SERVICE : "tour";
+const state = { service: INITIAL_SERVICE, route: services[INITIAL_SERVICE].routes[0] || "", airport: "Fiumicino Airport (FCO)", vehicle: "suv", hours: 3 };
 const serviceSelect = document.querySelector("#serviceSelect");
 const routeBlock = document.querySelector("#routeBlock");
 const airportBlock = document.querySelector("#airportBlock");
@@ -159,12 +162,19 @@ const dynamicFields = document.querySelector("#dynamicFields");
 const priceValue = document.querySelector("#priceValue");
 const priceNote = document.querySelector("#priceNote");
 
-Object.entries(services).forEach(([key, service]) => {
+const serviceEntries = services[FIXED_SERVICE] ? [[FIXED_SERVICE, services[FIXED_SERVICE]]] : Object.entries(services);
+
+serviceEntries.forEach(([key, service]) => {
   const option = document.createElement("option");
   option.value = key;
   option.textContent = service.label;
   serviceSelect.append(option);
 });
+
+if (services[FIXED_SERVICE]) {
+  document.body.classList.add("fixed-service-page");
+  serviceSelect.disabled = true;
+}
 
 function money(value) {
   return value === null ? "REQUEST A QUOTE" : `€${value}`;
@@ -337,6 +347,7 @@ document.querySelector("#bookingForm").addEventListener("submit", (event) => {
 });
 
 serviceSelect.addEventListener("change", () => {
+  if (services[FIXED_SERVICE]) return;
   state.service = serviceSelect.value;
   state.route = services[state.service].routes[0] || "";
   state.vehicle = "suv";
@@ -411,5 +422,55 @@ function loadGoogleMaps() {
   document.head.append(script);
 }
 
+function initCarousels() {
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector(".carousel-track");
+    const prev = carousel.querySelector("[data-carousel-prev]");
+    const next = carousel.querySelector("[data-carousel-next]");
+    if (!track || !prev || !next) return;
+    const move = (direction) => {
+      const slide = track.querySelector(".carousel-slide");
+      const gap = 14;
+      const amount = slide ? slide.getBoundingClientRect().width + gap : track.clientWidth * 0.9;
+      const nearEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - amount * 0.35;
+      if (direction > 0 && nearEnd) {
+        track.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        track.scrollBy({ left: direction * amount, behavior: "smooth" });
+      }
+    };
+    prev.addEventListener("click", () => move(-1));
+    next.addEventListener("click", () => move(1));
+    window.setInterval(() => move(1), 5000);
+  });
+}
+
+function initRevealCards() {
+  const cards = document.querySelectorAll(".service-strip .service-card, .other-services .service-card, .deep-services .deep-card");
+  if (!cards.length) return;
+
+  cards.forEach((card, index) => {
+    card.classList.add("reveal-ready");
+    card.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 90}ms`);
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    cards.forEach((card) => card.classList.add("revealed"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("revealed");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+
+  cards.forEach((card) => observer.observe(card));
+}
+
 render();
+initCarousels();
+initRevealCards();
 loadGoogleMaps();

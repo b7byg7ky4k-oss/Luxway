@@ -704,19 +704,15 @@ body[data-fixed-service] .landing-card {
   overflow: hidden;
 }
 .carousel-track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 86%;
-  gap: 14px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  padding-bottom: 4px;
+  display: flex;
+  width: 100%;
+  overflow: visible;
+  transition: transform .55s cubic-bezier(.2, .8, .2, 1);
+  will-change: transform;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 .carousel-slide {
-  scroll-snap-align: center;
+  flex: 0 0 100%;
   margin: 0;
   background: var(--ink);
   color: #fff;
@@ -833,7 +829,6 @@ body[data-fixed-service] .landing-card {
   .included-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steps-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .other-services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .carousel-track { grid-auto-columns: minmax(0, 48%); }
   .deep-card { grid-template-columns: 1fr 1fr; align-items: center; }
   .deep-card:nth-child(even) img { order: 2; }
   .features { grid-template-columns: repeat(4, 1fr); }
@@ -848,7 +843,6 @@ body[data-fixed-service] .landing-card {
   .booking-shell { grid-template-columns: 320px 1fr; align-items: start; }
   .booking-side { position: sticky; top: 92px; }
   .other-services { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .carousel-track { grid-auto-columns: minmax(0, 32%); }
 }
 
 @media (max-width: 719px) {
@@ -961,9 +955,6 @@ body[data-fixed-service] .landing-card {
   }
   .service-review-grid article {
     padding: 16px;
-  }
-  .carousel-track {
-    grid-auto-columns: 92%;
   }
   .carousel-control {
     width: 38px;

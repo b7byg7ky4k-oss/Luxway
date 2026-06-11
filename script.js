@@ -551,20 +551,34 @@ function initCarousels() {
     const prev = carousel.querySelector("[data-carousel-prev]");
     const next = carousel.querySelector("[data-carousel-next]");
     if (!track || !prev || !next) return;
-    const move = (direction) => {
-      const slide = track.querySelector(".carousel-slide");
-      const gap = 14;
-      const amount = slide ? slide.getBoundingClientRect().width + gap : track.clientWidth * 0.9;
-      const nearEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - amount * 0.35;
-      if (direction > 0 && nearEnd) {
-        track.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        track.scrollBy({ left: direction * amount, behavior: "smooth" });
-      }
+    const slides = Array.from(track.querySelectorAll(".carousel-slide"));
+    if (!slides.length) return;
+
+    let index = 0;
+    let timer = null;
+
+    const show = (nextIndex) => {
+      index = (nextIndex + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      slides.forEach((slide, slideIndex) => {
+        slide.setAttribute("aria-hidden", String(slideIndex !== index));
+      });
     };
+
+    const move = (direction) => show(index + direction);
+    const start = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(() => move(1), 3000);
+    };
+
     prev.addEventListener("click", () => move(-1));
     next.addEventListener("click", () => move(1));
-    window.setInterval(() => move(1), 5000);
+    carousel.addEventListener("mouseenter", () => window.clearInterval(timer));
+    carousel.addEventListener("mouseleave", start);
+    carousel.addEventListener("focusin", () => window.clearInterval(timer));
+    carousel.addEventListener("focusout", start);
+    show(0);
+    start();
   });
 }
 

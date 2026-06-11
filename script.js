@@ -214,17 +214,21 @@ const vehicleBlock = document.querySelector("#vehicleBlock");
 const dynamicFields = document.querySelector("#dynamicFields");
 const priceValue = document.querySelector("#priceValue");
 const priceNote = document.querySelector("#priceNote");
+const bookingForm = document.querySelector("#bookingForm");
+const hasBookingForm = Boolean(serviceSelect && routeBlock && airportBlock && hoursBlock && vehicleBlock && dynamicFields && priceValue && priceNote && bookingForm);
 
 const serviceEntries = services[FIXED_SERVICE] ? [[FIXED_SERVICE, services[FIXED_SERVICE]]] : Object.entries(services);
 
-serviceEntries.forEach(([key, service]) => {
-  const option = document.createElement("option");
-  option.value = key;
-  option.textContent = service.label;
-  serviceSelect.append(option);
-});
+if (serviceSelect) {
+  serviceEntries.forEach(([key, service]) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = service.label;
+    serviceSelect.append(option);
+  });
+}
 
-if (services[FIXED_SERVICE]) {
+if (services[FIXED_SERVICE] && serviceSelect) {
   document.body.classList.add("fixed-service-page");
   serviceSelect.disabled = true;
 }
@@ -440,34 +444,38 @@ function collectForm() {
   return details;
 }
 
-document.querySelector("#bookingForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const details = collectForm();
-  const lines = ["Hello,", "", "I would like to book:", ""];
-  Object.entries(details).forEach(([key, value]) => {
-    if (value) lines.push(`${key}: ${value}`);
+if (bookingForm) {
+  bookingForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const details = collectForm();
+    const lines = ["Hello,", "", "I would like to book:", ""];
+    Object.entries(details).forEach(([key, value]) => {
+      if (value) lines.push(`${key}: ${value}`);
+    });
+    lines.push("", "Thank you.");
+    const body = lines.join("\n");
+    const channel = event.submitter?.dataset.submitChannel || "whatsapp";
+    if (window.fbq) fbq("track", "Lead", { content_name: details.Service });
+    if (channel === "email") {
+      if (window.gtag) gtag("event", "booking_email_click", { service: details.Service });
+      const subject = encodeURIComponent(`Booking request - ${details.Service}`);
+      window.location.href = `mailto:${BOOKING_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+    if (window.gtag) gtag("event", "booking_whatsapp_click", { service: details.Service });
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
   });
-  lines.push("", "Thank you.");
-  const body = lines.join("\n");
-  const channel = event.submitter?.dataset.submitChannel || "whatsapp";
-  if (window.fbq) fbq("track", "Lead", { content_name: details.Service });
-  if (channel === "email") {
-    if (window.gtag) gtag("event", "booking_email_click", { service: details.Service });
-    const subject = encodeURIComponent(`Booking request - ${details.Service}`);
-    window.location.href = `mailto:${BOOKING_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
-    return;
-  }
-  if (window.gtag) gtag("event", "booking_whatsapp_click", { service: details.Service });
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
-});
+}
 
-serviceSelect.addEventListener("change", () => {
-  if (services[FIXED_SERVICE]) return;
-  state.service = serviceSelect.value;
-  state.route = services[state.service].routes[0] || "";
-  state.vehicle = "suv";
-  render();
-});
+if (serviceSelect) {
+  serviceSelect.addEventListener("change", () => {
+    if (services[FIXED_SERVICE]) return;
+    state.service = serviceSelect.value;
+    state.route = services[state.service].routes[0] || "";
+    state.vehicle = "suv";
+    render();
+  });
+}
 
 document.querySelectorAll("[data-service-jump]").forEach((item) => {
   item.addEventListener("click", () => {
@@ -594,7 +602,8 @@ function initMobileMenu() {
   button.type = "button";
   button.setAttribute("aria-expanded", "false");
   button.setAttribute("aria-controls", "mobile-menu-panel");
-  button.textContent = "Menu";
+  button.setAttribute("aria-label", "Open menu");
+  button.innerHTML = '<span class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span></span><span class="visually-hidden">Menu</span>';
 
   const panel = document.createElement("div");
   panel.className = "mobile-menu-panel";
@@ -619,6 +628,7 @@ function initMobileMenu() {
   button.addEventListener("click", () => {
     const isOpen = button.getAttribute("aria-expanded") === "true";
     button.setAttribute("aria-expanded", String(!isOpen));
+    button.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
     panel.hidden = isOpen;
     document.body.classList.toggle("mobile-menu-open", !isOpen);
   });
@@ -626,12 +636,48 @@ function initMobileMenu() {
   panel.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Open menu");
       panel.hidden = true;
       document.body.classList.remove("mobile-menu-open");
     });
   });
 
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || panel.hidden) return;
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-label", "Open menu");
+    panel.hidden = true;
+    document.body.classList.remove("mobile-menu-open");
+  });
+
   header.append(button, panel);
+}
+
+function initCookieNotice() {
+  const storageKey = "luxwayCookieChoice";
+  if (localStorage.getItem(storageKey)) return;
+
+  const banner = document.createElement("div");
+  banner.className = "cookie-banner";
+  banner.setAttribute("role", "dialog");
+  banner.setAttribute("aria-live", "polite");
+  banner.setAttribute("aria-label", "Cookie notice");
+  banner.innerHTML = `
+    <p>LuxWay uses essential cookies and may use third-party services for maps, analytics and booking links. Read the <a href="${ASSET_BASE}cookie-policy/">Cookie Policy</a> and <a href="${ASSET_BASE}privacy-policy/">Privacy Policy</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn primary" type="button" data-cookie-choice="accepted">Accept</button>
+      <button class="btn light" type="button" data-cookie-choice="declined">Reject</button>
+    </div>
+  `;
+
+  banner.querySelectorAll("[data-cookie-choice]").forEach((button) => {
+    button.addEventListener("click", () => {
+      localStorage.setItem(storageKey, button.dataset.cookieChoice);
+      banner.hidden = true;
+    });
+  });
+
+  document.body.append(banner);
 }
 
 function initServiceReviews() {
@@ -663,10 +709,11 @@ function initServiceReviews() {
   if (reviewLink) reviewLink.setAttribute("href", "#service-reviews");
 }
 
-render();
+if (hasBookingForm) render();
 initCarousels();
 initMobileMenu();
 initServiceReviews();
 initBenefitCards();
 initRevealCards();
+initCookieNotice();
 loadGoogleMaps();

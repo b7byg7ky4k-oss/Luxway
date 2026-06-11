@@ -6,11 +6,11 @@ const TRIPADVISOR_URL = "https://it.tripadvisor.ch/Attraction_Review-g187791-d33
 const seo = {
   en: {
     title: "Private Transfers Rome | NCC Chauffeur Service | LuxWay",
-    description: "LuxWay offers private NCC transfers in Rome with fixed prices, English-speaking chauffeurs, airport transfers, Civitavecchia cruise port transfers, hourly service and 3-hour Rome panoramic tours.",
+    description: "Book LuxWay private NCC transfers in Rome: airports, Civitavecchia port, hourly chauffeur, city transfers and panoramic tours with fixed prices.",
     keywords: "private transfers Rome, NCC Rome, chauffeur service Rome, Rome airport transfer, Fiumicino transfer, Ciampino transfer, Civitavecchia transfer, Rome panoramic tour, private driver Rome, luxury van Rome",
     ogTitle: "Private Transfers Rome | NCC Chauffeur Service | LuxWay",
-    ogDescription: "Fixed-price NCC chauffeur service in Rome for airports, Civitavecchia port, hourly rides, city transfers and Rome panoramic tours.",
-    twitterDescription: "Book private NCC transfers in Rome by WhatsApp or email: airports, Civitavecchia, hourly chauffeur service and panoramic tours.",
+    ogDescription: "Book private NCC transfers in Rome for airports, Civitavecchia port, hourly chauffeur, city transfers and panoramic tours.",
+    twitterDescription: "Book private NCC transfers in Rome by WhatsApp or email: airports, Civitavecchia, hourly chauffeur and panoramic tours.",
     locale: "en_US"
   },
   it: {

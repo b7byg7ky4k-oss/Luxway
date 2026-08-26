@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.luxwayrome.com/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/hero-rome-chauffeur.png</image:loc>
+      <image:title>Private NCC chauffeur service in Rome</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.luxwayrome.com/partners.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/luxway-partners-reel-cover-bmw-x1-2025.png</image:loc>
+      <image:title>LuxWay Partners private chauffeur service in Rome</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.luxwayrome.com/services/rome-panoramic-tour/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/rome-panoramic-tour.png</image:loc>
+      <image:title>Private Rome panoramic tour with chauffeur</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/checkpoint-colosseum.jpg</image:loc>
+      <image:title>Colosseum panoramic tour checkpoint</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.luxwayrome.com/services/rome-airport-transfers/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/airport-transfer.png</image:loc>
+      <image:title>Private airport transfer in Rome</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.luxwayrome.com/services/cruise-port-transfers/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/cruise-port-transfer.png</image:loc>
+      <image:title>Civitavecchia cruise port private transfer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.luxwayrome.com/services/hourly-chauffeur-service/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/hourly-chauffeur.png</image:loc>
+      <image:title>Hourly chauffeur service in Rome</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.luxwayrome.com/services/city-to-city-transfers/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/city-to-city.png</image:loc>
+      <image:title>Private city to city transfers from Rome</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.luxwayrome.com/assets/images/destination-florence.jpg</image:loc>
+      <image:title>Rome to Florence private transfer destination</image:title>
+    </image:image>
+  </url>
+</urlset>

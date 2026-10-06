@@ -1,0 +1,297 @@
+/* LuxWay depth layer: original imagery, colours and document structure retained. */
+:root {
+  --lw-depth-ease: cubic-bezier(.2, .7, .2, 1);
+  --lw-depth-shadow: inset 0 1px 0 rgba(255, 255, 255, .9),
+    inset 0 -1px 0 rgba(182, 138, 53, .2),
+    0 5px 0 rgba(203, 194, 173, .44),
+    0 17px 27px -17px rgba(12, 15, 18, .55),
+    0 30px 50px -35px rgba(12, 15, 18, .42);
+}
+
+.site-header {
+  box-shadow: 0 1px 0 rgba(182, 138, 53, .25), 0 9px 28px rgba(0, 0, 0, .2);
+}
+
+/* The image moves independently from the readable, stationary hero content. */
+.hero.lw-depth-scene,
+.service-landing-hero.lw-depth-scene {
+  isolation: isolate;
+}
+
+.hero.lw-depth-scene > img,
+.service-landing-hero.lw-depth-scene > img {
+  animation: none;
+  transform: perspective(1400px)
+    translate3d(var(--lw-scene-x, 0px), var(--lw-scene-y, 0px), 0)
+    rotateX(var(--lw-scene-rx, 0deg)) rotateY(var(--lw-scene-ry, 0deg)) scale(1.065);
+  transform-origin: center;
+  transition: transform .5s var(--lw-depth-ease);
+}
+
+.service-landing-hero.lw-depth-scene::after {
+  /* A static gold reflection replaces the original perpetual animation. */
+  animation: none;
+  opacity: .22;
+}
+
+.lw-depth-scene .hero-content {
+  text-shadow: 0 3px 18px rgba(0, 0, 0, .28);
+}
+
+.lw-depth-scene .trust-row span {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 0 rgba(0, 0, 0, .15), 0 9px 18px rgba(0, 0, 0, .15);
+  backdrop-filter: blur(6px);
+}
+
+.service-card,
+.deep-card,
+.landing-card,
+.vehicle-card,
+.review-grid article,
+.service-review-grid article,
+.booking-side,
+.booking-form,
+.legal-card,
+.faq-list details,
+.city-price-card,
+.lw-partners .fleet-card,
+.lw-partners .trust-card,
+.lw-partners .partner-form,
+.lw-partners .mockup,
+.lw-partners .pricing-card {
+  box-shadow: var(--lw-depth-shadow);
+}
+
+.service-strip {
+  position: relative;
+  z-index: 3;
+}
+
+/* Only cards are tilted; booking forms, fields and sticky panels stay level. */
+.lw-depth-card {
+  --lw-tilt-x: 0deg;
+  --lw-tilt-y: 0deg;
+  --lw-card-lift: 0px;
+  --lw-enter-y: 0px;
+  position: relative;
+  transform-origin: center;
+  transition: transform .5s var(--lw-depth-ease), box-shadow .35s ease,
+    border-color .35s ease, opacity .6s ease;
+}
+
+.lw-depth-card:not(.reveal-ready),
+.lw-depth-card.revealed,
+.benefits-section .landing-card.lw-depth-card.revealed:hover {
+  transform: perspective(1100px) translate3d(0, calc(var(--lw-card-lift) + var(--lw-enter-y)), 0)
+    rotateX(var(--lw-tilt-x)) rotateY(var(--lw-tilt-y));
+}
+
+.lw-depth-card.lw-depth-hover {
+  --lw-card-lift: -6px;
+  border-color: rgba(182, 138, 53, .62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85),
+    inset 0 -1px 0 rgba(182, 138, 53, .3),
+    0 7px 0 rgba(203, 194, 173, .38),
+    0 24px 35px -20px rgba(12, 15, 18, .65),
+    0 36px 58px -30px rgba(12, 15, 18, .3);
+  transition-delay: 0ms;
+}
+
+.lw-depth-card.lw-depth-enter {
+  --lw-enter-y: 22px;
+  opacity: 0;
+}
+
+.lw-depth-card.lw-depth-enter.lw-depth-visible {
+  --lw-enter-y: 0px;
+  opacity: 1;
+}
+
+.lw-depth-card.reveal-ready:not(.lw-depth-hover) {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.vehicle-card.selected {
+  box-shadow: 0 0 0 3px rgba(182, 138, 53, .17), var(--lw-depth-shadow);
+}
+
+.price-panel,
+.service-price {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16), 0 4px 0 rgba(0, 0, 0, .2), 0 16px 26px -18px rgba(0, 0, 0, .55);
+}
+
+.price-panel {
+  border-top: 1px solid rgba(182, 138, 53, .7);
+  background-image: linear-gradient(135deg, rgba(182, 138, 53, .1), transparent 65%);
+}
+
+.btn,
+.wa-small,
+.lw-partners .btn {
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2),
+    inset 0 -1px 0 rgba(0, 0, 0, .12), 0 4px 0 rgba(0, 0, 0, .18),
+    0 10px 19px -12px rgba(0, 0, 0, .55);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.btn:active,
+.wa-small:active,
+.lw-partners .btn:active {
+  transform: translateY(3px);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .15), 0 1px 0 rgba(0, 0, 0, .2);
+}
+
+.btn:focus-visible,
+.wa-small:focus-visible,
+.service-card:focus-visible,
+.vehicle-card:focus-visible,
+.lw-partners .btn:focus-visible {
+  outline: 3px solid var(--gold, #b68a35);
+  outline-offset: 5px;
+}
+
+.benefit-icon,
+.features span,
+.lw-partners .icon,
+.lw-partners .step-no {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 3px 0 rgba(182, 138, 53, .24), 0 8px 14px -9px rgba(0, 0, 0, .5);
+}
+
+.faq-list details[open] {
+  border-color: rgba(182, 138, 53, .55);
+}
+
+/* Partners uses a CSS hero background, so its illustration stays intact. */
+.lw-partners .hero.lw-depth-scene {
+  background-position: center, calc(50% + var(--lw-scene-x, 0px)) calc(50% + var(--lw-scene-y, 0px));
+  background-size: auto, cover;
+  transition: background-position .5s var(--lw-depth-ease);
+}
+
+.lw-partners .mockup.lw-depth-card {
+  --lw-tilt-y: -3deg;
+}
+
+.lw-partners .mockup,
+.lw-partners .pricing-card,
+.lw-partners .fleet-card {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12),
+    0 5px 0 rgba(12, 15, 18, .25), 0 24px 45px -24px rgba(0, 0, 0, .7);
+}
+
+/* The requested city fares share a consistent, responsive presentation. */
+.city-price-grid {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.city-price-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line, #dde3e8);
+  border-top: 3px solid var(--gold, #b68a35);
+  background: var(--panel, #fff);
+}
+
+.city-price-card > img {
+  width: 100%;
+  height: 156px;
+  object-fit: cover;
+}
+
+.city-price-card h3 {
+  margin: 20px 18px 14px;
+  color: var(--ink, #0c0f12);
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.city-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin: 0 18px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line, #dde3e8);
+  font-size: 13px;
+}
+
+.city-price-row strong {
+  color: var(--gold, #b68a35);
+  font-size: 18px;
+}
+
+.city-price-card > .btn,
+.city-price-body > .btn {
+  display: flex;
+  margin: 12px 18px 22px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover,
+  .wa-small:hover,
+  .lw-partners .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:active,
+  .wa-small:active,
+  .lw-partners .btn:active {
+    transform: translateY(3px);
+  }
+}
+
+@media (max-width: 1000px) {
+  .city-price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .city-price-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .city-price-card > img { height: 190px; }
+  .lw-partners .mockup.lw-depth-card { --lw-tilt-y: 0deg; }
+}
+
+@media (max-width: 430px) {
+  .hero.lw-depth-scene > img,
+  .service-landing-hero.lw-depth-scene > img {
+    /* Keep the existing full-image mobile crop and modest scroll depth. */
+    transform: translate3d(0, var(--lw-scene-y, 0px), 0) scale(1.035);
+  }
+  .lw-partners .hero.lw-depth-scene {
+    background-position: center, calc(58% + var(--lw-scene-x, 0px)) calc(50% + var(--lw-scene-y, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero.lw-depth-scene > img,
+  .service-landing-hero.lw-depth-scene > img,
+  .lw-depth-card,
+  .lw-depth-card:not(.reveal-ready),
+  .lw-depth-card.revealed,
+  .benefits-section .landing-card.lw-depth-card.revealed:hover,
+  .btn,
+  .btn:hover,
+  .btn:active,
+  .wa-small,
+  .wa-small:hover,
+  .wa-small:active,
+  .lw-partners .btn,
+  .lw-partners .btn:hover,
+  .lw-partners .btn:active,
+  .lw-partners .hero.lw-depth-scene {
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+  .lw-depth-card.lw-depth-enter { opacity: 1; }
+  .lw-partners .hero.lw-depth-scene { background-position: center, center; }
+}

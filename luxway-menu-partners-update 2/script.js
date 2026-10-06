@@ -1,4 +1,4 @@
-const WA_NUMBER = "393290937951";
+const WA_NUMBER = "393522334674";
 const BOOKING_EMAIL = "luxwaydrivers@gmail.com";
 const ASSET_BASE = window.LUXWAY_ASSET_BASE || "";
 const TRIPADVISOR_URL = "https://it.tripadvisor.ch/Attraction_Review-g187791-d33680217-Reviews-LuxWay-Rome_Lazio.html";
@@ -33,13 +33,20 @@ const translations = {
     badgeFixed: "Fixed Prices", badgeFees: "No Hidden Fees", badgeFlight: "Flight Monitoring", badgeEnglish: "English Speaking Driver", badgePay: "Pay Directly to the Driver",
     bookNow: "Book Now", airportTitle: "Airport Transfers", cruiseTitle: "Cruise Port Transfers", hourlyTitle: "Hourly Chauffeur Service", cityTitle: "City to City Transfers", tourTitle: "Rome Panoramic Tour",
     tourCardText: "3 Hours • Rome Highlights",
+    cityStartingPrice: "From €400", cityStartingLabel: "From", citySelectRoute: "Select Route from Rome",
+    cityPriceNote: "Starting price. Final quote confirmed by WhatsApp or email.", cityCustomNote: "Custom route: request a quote by WhatsApp or email.",
+    cityRatesTitle: "Your Italian Journey, with Clear Starting Prices", cityRatesEyebrow: "From Rome, Door to Door",
+    cityRatesText: "Starting prices for a private transfer from Rome. Your final quote is confirmed for your itinerary.",
+    cityCar: "SUV / Sedan", cityVan: "Luxury Van", cityRouteQuote: "Request This Route",
+    routeFlorence: "Rome → Florence", routePositano: "Rome → Positano", routeNaples: "Rome → Naples", routeAmalfi: "Rome → Amalfi", routeCustom: "Custom Route",
+    from400: "From €400", from450: "From €450", from500: "From €500", from600: "From €600", from650: "From €650", from750: "From €750",
     quote: "Request a Quote", bookingEyebrow: "Book in under 60 seconds", bookingTitle: "Fast Booking",
     bookingText: "Select your service, vehicle and details. Your complete booking request opens directly in WhatsApp or by email.",
     selectService: "Select Service", yourPrice: "Your Price", openWhatsapp: "Send Request via WhatsApp", sendEmail: "Send Request by Email",
     reviewsTitle: "Premium Reviews", reviewsText: "Top-rated private chauffeur service for Rome arrivals, cruise transfers and private tours.",
     faqTitle: "Frequently Asked Questions", faqText: "Clear answers before booking your LuxWay private chauffeur service in Rome.",
     faq1Question: "How do I book a transfer?", faq1Answer: "Select the service, vehicle and travel details. The complete request opens directly on WhatsApp, where we confirm availability and final details.",
-    faq2Question: "Are prices fixed?", faq2Answer: "Airport, port and Rome panoramic tour prices are fixed for the selected vehicle. City-to-city transfers are quoted by WhatsApp.",
+    faq2Question: "Are prices fixed?", faq2Answer: "Airport, port and Rome panoramic tour prices are fixed for the selected vehicle. City-to-city transfers have starting prices; the final quote is confirmed by WhatsApp or email.",
     faq3Question: "What is included in the 3-hour panoramic tour?", faq3Answer: "The tour includes a private chauffeur and the main checkpoints: Colosseum, Trevi Fountain, Spanish Steps, Circus Maximus, Pantheon and Gianicolo Hill.",
     faq4Question: "Can I pay the driver directly?", faq4Answer: "Yes. You can pay directly to the driver, and the booking details are confirmed in advance through WhatsApp.",
     faq5Question: "Why choose LuxWay instead of another company?", faq5Answer: "LuxWay combines fixed prices, licensed NCC drivers, clean premium vehicles, punctual service, flight monitoring and direct WhatsApp or email coordination. You speak with the team before the ride, so every detail is clear before pickup.",
@@ -58,13 +65,20 @@ const translations = {
     badgeFixed: "Prezzi Fissi", badgeFees: "Nessun Costo Nascosto", badgeFlight: "Monitoraggio Volo", badgeEnglish: "Autista parla inglese", badgePay: "Paghi direttamente all'autista",
     bookNow: "Prenota Ora", airportTitle: "Transfer Aeroporto", cruiseTitle: "Transfer Porto Crociere", hourlyTitle: "Chauffeur a Disposizione", cityTitle: "Transfer Citta a Citta", tourTitle: "Tour Panoramico di Roma",
     tourCardText: "3 Ore • Tappe Iconiche",
+    cityStartingPrice: "A partire da €400", cityStartingLabel: "A partire da", citySelectRoute: "Seleziona tratta da Roma",
+    cityPriceNote: "Prezzo di partenza. Preventivo finale confermato su WhatsApp o via email.", cityCustomNote: "Tratta personalizzata: richiedi un preventivo su WhatsApp o via email.",
+    cityRatesTitle: "Il tuo viaggio in Italia, con prezzi di partenza chiari", cityRatesEyebrow: "Da Roma, porta a porta",
+    cityRatesText: "Prezzi di partenza per un transfer privato da Roma. Il preventivo finale viene confermato in base al tuo itinerario.",
+    cityCar: "SUV / Berlina", cityVan: "Van di lusso", cityRouteQuote: "Richiedi questa tratta",
+    routeFlorence: "Roma → Firenze", routePositano: "Roma → Positano", routeNaples: "Roma → Napoli", routeAmalfi: "Roma → Amalfi", routeCustom: "Tratta personalizzata",
+    from400: "A partire da €400", from450: "A partire da €450", from500: "A partire da €500", from600: "A partire da €600", from650: "A partire da €650", from750: "A partire da €750",
     quote: "Richiedi Preventivo", bookingEyebrow: "Prenota in meno di 60 secondi", bookingTitle: "Prenotazione Rapida",
     bookingText: "Seleziona servizio, veicolo e dettagli. La richiesta completa si apre direttamente su WhatsApp o via email.",
     selectService: "Seleziona Servizio", yourPrice: "Il tuo prezzo", openWhatsapp: "Invia la richiesta tramite WhatsApp", sendEmail: "Invia richiesta via email",
     reviewsTitle: "Recensioni Premium", reviewsText: "Servizio chauffeur top-rated per arrivi a Roma, transfer crociere e tour privati.",
     faqTitle: "Domande Frequenti", faqText: "Risposte chiare prima di prenotare il tuo servizio chauffeur privato LuxWay a Roma.",
     faq1Question: "Come prenoto un transfer?", faq1Answer: "Seleziona servizio, veicolo e dettagli del viaggio. La richiesta completa si apre direttamente su WhatsApp, dove confermiamo disponibilita e dettagli finali.",
-    faq2Question: "I prezzi sono fissi?", faq2Answer: "I prezzi per aeroporto, porto e tour panoramico di Roma sono fissi in base al veicolo selezionato. I transfer citta a citta vengono quotati su WhatsApp.",
+    faq2Question: "I prezzi sono fissi?", faq2Answer: "I prezzi per aeroporto, porto e tour panoramico di Roma sono fissi in base al veicolo selezionato. I transfer città a città hanno prezzi di partenza; il preventivo finale viene confermato su WhatsApp o via email.",
     faq3Question: "Cosa include il tour panoramico di 3 ore?", faq3Answer: "Il tour include chauffeur privato e i principali checkpoint: Colosseo, Fontana di Trevi, Piazza di Spagna, Circo Massimo, Pantheon e Gianicolo.",
     faq4Question: "Posso pagare direttamente l'autista?", faq4Answer: "Si. Puoi pagare direttamente l'autista, con tutti i dettagli della prenotazione confermati in anticipo su WhatsApp.",
     faq5Question: "Perche scegliere LuxWay rispetto ad altre compagnie?", faq5Answer: "LuxWay unisce prezzi fissi, autisti NCC autorizzati, veicoli premium puliti, puntualita, monitoraggio volo e coordinamento diretto via WhatsApp o email. Parli con il team prima della corsa, cosi ogni dettaglio e chiaro prima del pickup.",
@@ -90,6 +104,13 @@ const vehicles = {
     passengers: "Maximum 8 passengers",
     luggage: "Maximum 8 large suitcases"
   }
+};
+
+const cityRoutes = {
+  "Rome → Florence": { key: "routeFlorence", suv: 450, van: 600 },
+  "Rome → Positano": { key: "routePositano", suv: 500, van: 750 },
+  "Rome → Naples": { key: "routeNaples", suv: 400, van: 650 },
+  "Rome → Amalfi": { key: "routeAmalfi", suv: 500, van: 750 }
 };
 
 const services = {
@@ -142,9 +163,10 @@ const services = {
   },
   city: {
     label: "City to City Transfer",
-    routes: [],
+    routeLabel: "Select Route from Rome",
+    routes: [...Object.keys(cityRoutes), "Custom Route"],
     prices: { suv: null, van: null },
-    note: "Quote confirmed by WhatsApp",
+    note: "Starting price. Final quote confirmed by WhatsApp or email.",
     fields() {
       return [["Departure Address", "text", "address"], ["Destination Address", "text", "address"], ["Date", "date"], ["Time", "time"], ["Passengers", "number"], ["Luggage", "text"], ["Customer Name", "text"], ["WhatsApp Number", "tel"], ["Special Requests", "textarea"]];
     }
@@ -237,9 +259,46 @@ function money(value) {
   return value === null ? "REQUEST A QUOTE" : `€${value}`;
 }
 
+function pricingText() {
+  return translations[document.documentElement.lang] || translations.en;
+}
+
+function cityRouteLabel(route) {
+  return pricingText()[cityRoutes[route]?.key || "routeCustom"];
+}
+
+function vehiclePrice(vehicle) {
+  if (state.service === "city") return cityRoutes[state.route]?.[vehicle] ?? null;
+  return services[state.service].prices[vehicle];
+}
+
 function currentPrice() {
   if (state.service === "hourly") return state.hours * services.hourly.prices[state.vehicle];
-  return services[state.service].prices[state.vehicle];
+  return vehiclePrice(state.vehicle);
+}
+
+function priceLabel(value) {
+  if (state.service !== "city") return money(value);
+  return value === null ? pricingText().quote : `${pricingText().cityStartingLabel} ${money(value)}`;
+}
+
+function updateBookingPrices() {
+  if (!hasBookingForm) return;
+  priceValue.textContent = priceLabel(currentPrice());
+  priceNote.textContent = state.service === "city"
+    ? pricingText()[currentPrice() === null ? "cityCustomNote" : "cityPriceNote"]
+    : services[state.service].note;
+  vehicleBlock.querySelectorAll("[data-vehicle-price]").forEach((node) => {
+    node.textContent = priceLabel(vehiclePrice(node.dataset.vehiclePrice));
+    if (state.service === "hourly") node.textContent += "/hour";
+  });
+  if (state.service === "city") {
+    const label = routeBlock.querySelector("label");
+    if (label) label.textContent = pricingText().citySelectRoute;
+    routeBlock.querySelectorAll(".choice").forEach((choice) => {
+      choice.querySelector("span").textContent = cityRouteLabel(choice.querySelector("input").value);
+    });
+  }
 }
 
 function makeOptions(name, values, selected, onChange) {
@@ -351,6 +410,7 @@ function initBenefitCards() {
 }
 
 function render() {
+  const previousValues = new Map(Array.from(dynamicFields.querySelectorAll("input, select, textarea"), (field) => [field.name, field.value]));
   const service = services[state.service];
   serviceSelect.value = state.service;
   routeBlock.innerHTML = "";
@@ -402,7 +462,7 @@ function render() {
           <p>${vehicleIcon("people")} <span>${maxPassengers}</span></p>
           <p>${vehicleIcon("suitcase")} <span>${vehicle.luggage}</span></p>
         </div>
-        <strong>${money(service.prices[key])}</strong>
+        <strong data-vehicle-price="${key}">${priceLabel(vehiclePrice(key))}</strong>
       </div>`;
     if (state.service === "hourly") card.querySelector("strong").textContent = `${money(service.prices[key])}/hour`;
     card.addEventListener("click", () => {
@@ -412,10 +472,11 @@ function render() {
     vehicleBlock.append(card);
   });
 
-  const price = currentPrice();
-  priceValue.textContent = money(price);
-  priceNote.textContent = service.note;
+  updateBookingPrices();
   service.fields(state.route).forEach((field) => dynamicFields.append(renderField(field)));
+  dynamicFields.querySelectorAll("input, select, textarea").forEach((field) => {
+    if (previousValues.has(field.name)) field.value = previousValues.get(field.name);
+  });
   if (state.service === "hourly" && state.hours > 6) {
     const hoursInput = document.querySelector("#number-of-hours");
     if (hoursInput) {
@@ -432,11 +493,12 @@ function render() {
 function collectForm() {
   const details = {
     Service: services[state.service].label,
-    Route: state.route || "",
+    Route: state.service === "city" ? cityRouteLabel(state.route) : state.route || "",
     Airport: state.service === "airport" ? state.airport : "",
     Vehicle: vehicles[state.vehicle].name,
-    Price: money(currentPrice())
+    Price: priceLabel(currentPrice())
   };
+  if (state.service === "city") details["Price Note"] = pricingText()[currentPrice() === null ? "cityCustomNote" : "cityPriceNote"];
   if (state.service === "hourly") details["Number of Hours"] = state.hours;
   dynamicFields.querySelectorAll("input, select, textarea").forEach((field) => {
     if (field.value) details[field.name] = field.value;
@@ -486,6 +548,15 @@ document.querySelectorAll("[data-service-jump]").forEach((item) => {
   });
 });
 
+document.querySelectorAll("[data-city-route]").forEach((item) => {
+  item.addEventListener("click", () => {
+    state.service = "city";
+    state.route = item.dataset.cityRoute;
+    render();
+    document.querySelector("#booking").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
 function setMeta(selector, value) {
   const tag = document.querySelector(selector);
   if (!tag) return;
@@ -513,12 +584,13 @@ document.querySelectorAll(".lang").forEach((button) => {
   button.addEventListener("click", () => {
     const lang = button.dataset.lang;
     document.documentElement.lang = lang;
-    updateSeo(lang);
+    if (!FIXED_SERVICE) updateSeo(lang);
     document.querySelectorAll(".lang").forEach((el) => el.classList.toggle("active", el === button));
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.dataset.i18n;
       if (translations[lang][key]) node.textContent = translations[lang][key];
     });
+    updateBookingPrices();
   });
 });
 

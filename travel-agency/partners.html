@@ -179,6 +179,7 @@
   @media (prefers-reduced-motion:reduce) { .lw-partners .hero:before { animation:none; } .has-scroll-animations .lw-partners .reveal,.has-scroll-animations .lw-partners .fleet-card { opacity:1; transform:none; transition:none; } .lw-partners .platform-slides { transition:none; } }
 </style>
 <script>document.documentElement.classList.add('has-scroll-animations');</script>
+  <link rel="stylesheet" href="../assets/luxway-depth.css">
 </head>
 <body>
 <main class="lw-partners">
@@ -189,7 +190,7 @@
       <p class="lead">Offer your clients premium transfers, private tours and chauffeur services throughout Rome and Italy—with confidential B2B rates, 24/7 operational assistance and complete booking visibility.</p>
       <div class="hero-actions">
         <a class="btn" href="#partner-contact" data-rates-cta>Request Our Confidential Partner Rates <span>→</span></a>
-        <a class="btn btn--outline" href="https://wa.me/393290937951?text=Hello%20LuxWay%2C%20I%27m%20interested%20in%20becoming%20a%20travel%20agency%20partner%20and%20receiving%20your%20confidential%20B2B%20rates." target="_blank" rel="noopener" data-whatsapp-partner>Contact Us on WhatsApp</a>
+        <a class="btn btn--outline" href="https://wa.me/393522334674?text=Hello%20LuxWay%2C%20I%27m%20interested%20in%20becoming%20a%20travel%20agency%20partner%20and%20receiving%20your%20confidential%20B2B%20rates." target="_blank" rel="noopener" data-whatsapp-partner>Contact Us on WhatsApp</a>
       </div>
     </div>
   </section>
@@ -294,7 +295,7 @@
         <p class="eyebrow">Travel agency partners</p>
         <h2>Request Our Confidential Partner Rates.</h2>
         <p class="section-intro">Tell us about your travel agency and the services your clients require. Our partner team will contact you with dedicated B2B information and confidential rates.</p>
-        <p class="form-note">For travel agencies and travel professionals only. Prefer WhatsApp? <a href="https://wa.me/393290937951?text=Hello%20LuxWay%2C%20I%27m%20interested%20in%20becoming%20a%20travel%20agency%20partner%20and%20receiving%20your%20confidential%20B2B%20rates." target="_blank" rel="noopener" data-whatsapp-partner>Contact our partner team on WhatsApp.</a></p>
+        <p class="form-note">For travel agencies and travel professionals only. Prefer WhatsApp? <a href="https://wa.me/393522334674?text=Hello%20LuxWay%2C%20I%27m%20interested%20in%20becoming%20a%20travel%20agency%20partner%20and%20receiving%20your%20confidential%20B2B%20rates." target="_blank" rel="noopener" data-whatsapp-partner>Contact our partner team on WhatsApp.</a></p>
       </div>
       <form class="partner-form" id="luxwayPartnerForm">
         <div class="form-grid">
@@ -327,7 +328,7 @@
     if (!partnerForm.reportValidity()) return;
     var v = new FormData(partnerForm), message = "Hello LuxWay, I would like to receive your confidential travel agency partner rates.\n\nTravel Agency: " + v.get('company') + "\nContact Person: " + v.get('contact') + "\nWork Email: " + v.get('email') + "\nWhatsApp / Phone: " + v.get('phone') + "\nCountry: " + v.get('country') + "\nEstimated Monthly Bookings: " + (v.get('bookings') || '') + "\nServices Interested In: " + (v.get('services') || '') + "\nMessage: " + (v.get('message') || '');
     status.textContent = '';
-    if (button.dataset.send === 'whatsapp') { window.open('https://wa.me/393290937951?text=' + encodeURIComponent(message), '_blank', 'noopener'); if (window.gtag) gtag('event','partner_whatsapp_click'); }
+    if (button.dataset.send === 'whatsapp') { window.open('https://wa.me/393522334674?text=' + encodeURIComponent(message), '_blank', 'noopener'); if (window.gtag) gtag('event','partner_whatsapp_click'); }
     else { window.location.href = 'mailto:luxwaydrivers@gmail.com?subject=' + encodeURIComponent('New LuxWay Travel Agency Partner Request') + '&body=' + encodeURIComponent(message); if (window.gtag) gtag('event','partner_email_click'); }
   });
 
@@ -360,5 +361,6 @@
     window.setInterval(function () { showSlide(activeSlide + 1); }, 6500);
   }
 </script>
+  <script src="../assets/luxway-depth.js" defer></script>
 </body>
 </html>
